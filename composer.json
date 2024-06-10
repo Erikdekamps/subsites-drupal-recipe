@@ -17,9 +17,15 @@
     "require": {
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^2",
+        "drupal/coffee": "^1.4",
         "drupal/core-composer-scaffold": "^10.3",
         "drupal/core-project-message": "^10.3",
         "drupal/core-recommended": "^10.3",
+        "drupal/gin": "3.x-dev",
+        "drupal/gin_toolbar": "1.x-dev",
+        "drupal/metatag": "^2.0",
+        "drupal/project_browser": "1.0.x-dev",
+        "drupal/uli_custom_workflow": "^1.0",
         "drush/drush": "^12.5",
         "oomphinc/composer-installers-extender": "^2"
     },

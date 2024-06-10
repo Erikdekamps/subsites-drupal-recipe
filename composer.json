@@ -48,7 +48,8 @@
             "cweagans/composer-patches": true,
             "oomphinc/composer-installers-extender": true
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "optimize-autoloader": true
     },
     "extra": {
         "drupal-scaffold": {
@@ -67,6 +68,7 @@
             "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
         },
+        "installer-types": ["drupal-recipe"],
         "drupal-core-project-message": {
             "include-keys": ["homepage", "support"],
             "post-create-project-cmd-message": [

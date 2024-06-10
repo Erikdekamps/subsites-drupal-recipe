@@ -105,8 +105,11 @@
             "drush user:password editor editor",
             "drush user:unblock editor"
         ],
+        "drupal:cleanup": [
+            "sudo rm -rf vendor web composer.lock patches.lock.json | true"
+        ],
         "drupal:rebuild": [
-            "sudo rm -rf vendor web composer.lock patches.lock.json | true",
+            "@drupal:cleanup",
             "@composer install",
             "@drupal:install"
         ],

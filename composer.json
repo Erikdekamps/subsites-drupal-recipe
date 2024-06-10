@@ -87,5 +87,58 @@
                 "#3446257: Create a source plugin that exposes recipes in the file system": "./patches/project_browser/473-9fb69df1.patch"
             }
         }
+    },
+    "scripts": {
+        "drupal:install": [
+            "Composer\\Config::disableProcessTimeout",
+            "cd web && php -d memory_limit=512M core/scripts/drupal install ../recipes/starshot",
+            "drush webform-libraries-download",
+            "drush state:set project_browser.allowed_recipes '[starshot_multilingual]' --input-format=yaml --yes"
+        ],
+        "drupal:install-dev": [
+            "cd web/sites/default && chmod +w . && rm -rf settings.php files",
+            "@drupal:install",
+            "drush config:set --yes system.logging error_level verbose",
+            "drush pm:enable --yes default_content",
+            "drush user:password admin admin",
+            "drush user:password editor editor",
+            "drush user:unblock editor"
+        ],
+        "drupal:rebuild": [
+            "sudo rm -rf vendor web composer.lock patches.lock.json | true",
+            "@composer install",
+            "@drupal:install"
+        ],
+        "drupal:run-server": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -d max_execution_time=0 web/core/scripts/drupal quick-start"
+        ],
+        "drupal:run-tests": [
+            "./vendor/bin/phpunit"
+        ],
+        "post-create-project-cmd": [
+            "@drupal:install",
+            "test -n \"$CI\" || composer drupal:run-server"
+        ]
+    },
+    "scripts-descriptions": {
+        "drupal:install": "Installs Starshot.",
+        "drupal:install-dev": "Installs Starshot, with additional modules and configuration tweaks for development.",
+        "drupal:rebuild": "Rebuilds the codebase and reinstalls Starshot from scratch. Should only be used for internal development.",
+        "drupal:run-server": "Runs Starshot using the PHP webserver and opens it in the default browser.",
+        "drupal:run-tests": "Runs Starshot's automated test suite."
+    },
+    "scripts-aliases": {
+        "drupal:install": [
+            "si",
+            "sin"
+        ],
+        "drupal:run-server": [
+            "rs",
+            "serve"
+        ],
+        "drupal:run-tests": [
+            "test"
+        ]
     }
 }

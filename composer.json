@@ -10,24 +10,39 @@
     },
     "repositories": [
         {
+            "type": "vcs",
+            "url": "https://github.com/Erikdekamps/subsites-core.git"
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "lucianocosta/jquery.mtz.monthpicker",
+                "version": "1.0",
+                "type": "drupal-library",
+                "source": {
+                    "url": "https://github.com/lucianocosta/jquery.mtz.monthpicker.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "require": {
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^2",
-        "drupal/coffee": "^1.4",
         "drupal/core-composer-scaffold": "^10.3",
         "drupal/core-project-message": "^10.3",
         "drupal/core-recommended": "^10.3",
-        "drupal/gin": "3.x-dev",
-        "drupal/gin_toolbar": "1.x-dev",
-        "drupal/metatag": "^2.0",
-        "drupal/project_browser": "1.0.x-dev",
-        "drupal/redirect": "^1.9",
-        "drupal/uli_custom_workflow": "^1.0",
         "drush/drush": "^12.5",
+        "erikdekamps/subsites_core": "@dev",
         "oomphinc/composer-installers-extender": "^2"
     },
     "require-dev": {
@@ -67,7 +82,8 @@
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
             "web/modules/custom/{$name}": ["type:drupal-custom-module"],
             "web/profiles/custom/{$name}": ["type:drupal-custom-profile"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+            "recipes/{$name}": ["type:drupal-recipe"]
         },
         "installer-types": ["drupal-recipe"],
         "drupal-core-project-message": {
@@ -93,8 +109,7 @@
     "scripts": {
         "drupal:install": [
             "Composer\\Config::disableProcessTimeout",
-            "cd web && php -d memory_limit=512M core/scripts/drupal install ../recipes/subsites",
-            "drush state:set project_browser.allowed_recipes '[starshot_multilingual]' --input-format=yaml --yes"
+            "cd web && php -d memory_limit=512M core/scripts/drupal install ../recipes/subsites_core"
         ],
         "drupal:install-dev": [
             "cd web/sites/default && chmod +w . && rm -rf settings.php files",
@@ -110,7 +125,7 @@
         ],
         "drupal:rebuild": [
             "@drupal:cleanup",
-            "@composer install",
+            "@composer install --optimize-autoloader",
             "@drupal:install"
         ],
         "drupal:run-server": [

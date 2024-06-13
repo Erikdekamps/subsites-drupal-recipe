@@ -1,0 +1,12 @@
+#!/bin/bash
+
+## Description: Reinstalls subsites and opens it in a browser.
+## Usage: reinstall
+## Example: "ddev reinstall"
+
+ddev delete -y --omit-snapshot
+rm -rf vendor web composer.lock patches.lock.json | true
+ddev start
+ddev composer install
+ddev composer drupal:install
+ddev login admin

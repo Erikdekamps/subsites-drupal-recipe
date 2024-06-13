@@ -1,0 +1,21 @@
+diff --git a/core/modules/layout_discovery/layout_discovery.module b/core/modules/layout_discovery/layout_discovery.module
+index 02bedc5..7b99eb0 100644
+--- a/core/modules/layout_discovery/layout_discovery.module
++++ b/core/modules/layout_discovery/layout_discovery.module
+@@ -42,10 +42,12 @@ function template_preprocess_layout(&$variables) {
+   $variables['in_preview'] = $variables['content']['#in_preview'] ?? FALSE;
+
+   // Create an attributes variable for each region.
+-  foreach (Element::children($variables['content']) as $name) {
+-    if (!isset($variables['content'][$name]['#attributes'])) {
+-      $variables['content'][$name]['#attributes'] = [];
++  if (isset($variables['content'])) {
++    foreach (Element::children($variables['content']) as $name) {
++      if (!isset($variables['content'][$name]['#attributes'])) {
++        $variables['content'][$name]['#attributes'] = [];
++      }
++      $variables['region_attributes'][$name] = new Attribute($variables['content'][$name]['#attributes']);
+     }
+-    $variables['region_attributes'][$name] = new Attribute($variables['content'][$name]['#attributes']);
+   }
+ }

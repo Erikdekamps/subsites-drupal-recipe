@@ -7,7 +7,7 @@ for testing purposes. @see https://github.com/phenaproxima/starshot-prototype
 A p.o.c. for a Drupal subsite recipe based on Starshot. This is a prototype.
 
 ## Features
-- Uses [https://github.com/Erikdekamps/subsites-core](Subsites core) as a base recipe for installing Drupal.
+- Uses [Subsites core](https://github.com/Erikdekamps/subsites-core) as a base recipe for installing Drupal.
 
 ## Links:
 - [https://ddev.readthedocs.io](https://ddev.readthedocs.io) - ddev docs

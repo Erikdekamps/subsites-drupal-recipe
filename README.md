@@ -3,12 +3,11 @@
 Prototype for Drupal using recipes for subsites completely based on Starshot
 for testing purposes. @see https://github.com/phenaproxima/starshot-prototype
 
-## What is this?
-
+## What is this
 A p.o.c. for a Drupal subsite recipe based on Starshot. This is a prototype.
 
 ## Features
-- t.b.d.
+- Uses [https://github.com/Erikdekamps/subsites-core](Subsites core) as a base recipe for installing Drupal.
 
 ## Links:
 - [https://ddev.readthedocs.io](https://ddev.readthedocs.io) - ddev docs
